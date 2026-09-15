@@ -396,6 +396,48 @@ body{padding-bottom:72px}
   html{scroll-behavior:auto}
 }
 :focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+/* ---- press ---- */
+.press{
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(63,66,92,.34), transparent 66%),
+    var(--night);
+  border-top:1px solid rgba(166,174,190,.10);
+  border-bottom:1px solid rgba(166,174,190,.10);
+}
+.press-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:clamp(30px,4vw,64px);
+  max-width:1180px;
+  margin:0 auto;
+}
+.quote{margin:0;position:relative;padding-top:26px}
+.quote::before{
+  content:"";
+  position:absolute;left:0;top:0;
+  width:28px;height:1px;
+  background:linear-gradient(to right,var(--amber),rgba(239,211,136,0));
+}
+.quote p{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(17px,1.75vw,23px);
+  line-height:1.38;
+  letter-spacing:-.004em;
+  color:var(--moon-white);
+  margin:0;
+}
+.quote cite{
+  display:block;
+  font-family:var(--display);
+  font-style:normal;
+  font-weight:600;
+  font-size:clamp(13px,1.35vw,17px);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin:20px 0 0;
+}
 </style>
 </head>
 <body>
@@ -427,6 +469,11 @@ body{padding-bottom:72px}
     <p class="lede reveal" id="lede"></p>
     <div class="body-copy reveal" id="taleCopy"></div>
   </div>
+</section>
+
+<section class="press">
+  <p class="eyebrow reveal" style="text-align:center">In the press</p>
+  <div class="press-grid" id="pressGrid"></div>
 </section>
 
 <section class="consider">
@@ -491,7 +538,7 @@ const FYC = {
   /* --- FYC categories. Keep to four to six. --- */
   categories: [
     { name: "Best Classical Solo Vocal Album",
-      credit: "Gilbert-Michel Rolle, tenor · Havana Lyceum Orchestra" },
+      credit: "Gilbert-Michel Rolle, tenor · Marlon Daniel, conductor · Havana Lyceum Orchestra" },
     { name: "Best Engineered Album, Classical",
       credit: "Jamshed Turel" },
     { name: "Best Arrangement, Instruments and Vocals",
@@ -506,7 +553,7 @@ const FYC = {
     { n:"II",  title:"Incantation", src:"02_Incantation_Chants_des_Equinoxes_256kb.mp3", note:"" },
     { n:"III", title:"Barbara",     src:"03_Barbara_Chants_des_Equinoxes_256kb.mp3",     note:"" },
     { n:"IV",  title:"Harlem",      src:"04_Harlem_Chants_des_Equinoxes_256kb.mp3",      note:"" },
-    { n:"V",   title:"Marinero",    src:"05_Marinero_Chants_des_Equinoxes_256kb.mp3",    note:"" }
+    { n:"V",   title:"Marinero",    src:"05_Marinero_Chants_des_Equinoxes_256kb.mp3",    note:"Soprano \u2014 Dunia Pedraza" }
   ],
 
   /* --- outbound links --- */
@@ -515,10 +562,22 @@ const FYC = {
     { label:"Visit the website", url:"https://gilbertmichelrolle.com/", solid:false }
   ],
 
+  /* --- press. Career notices, honestly attributed. No dates. --- */
+  press: [
+    { quote:"Swiss tenor Gilbert-Michel Rolle has a lyrical voice and adapted it skillfully to the emotions deeply anchored.",
+      source:"The Washington Post" },
+    { quote:"With unaffected charm, Rolle shaped the exquisite flow of melody.",
+      source:"The Washington Post" },
+    { quote:"The recognition of his talent as a performer and a tribute to the beauty of his vocal range.",
+      source:"Le Temps" }
+  ],
+
   credits: [
     { role:"Composed & written by",  names:"Gilbert-Michel Rolle" },
     { role:"Tenor",                  names:"Gilbert-Michel Rolle" },
     { role:"Orchestra",              names:"Havana Lyceum Orchestra" },
+    { role:"Conductor",              names:"Marlon Daniel" },
+    { role:"Soprano",                names:"Dunia Pedraza" },
     { role:"Recorded at",            names:"Abdala Studios, Havana, Cuba" },
     { role:"Engineered & produced by", names:"Jamshed Turel" },
     { role:"Edited, mixed & mastered at", names:"T11 Studios, Canada" },
@@ -551,6 +610,10 @@ const FYC = {
   $('#taleCopy').innerHTML    = FYC.tale.map(p=>'<p>'+esc(p)+'</p>').join('');
   $('#tracksEyebrow').textContent = FYC.tracksEyebrow;
   $('#footLine').textContent  = FYC.label + " · " + FYC.artist;
+
+  $('#pressGrid').innerHTML = FYC.press.map(q=>
+    '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p><cite>'+esc(q.source)+'</cite></blockquote>'
+  ).join('');
 
   $('#cats').innerHTML = FYC.categories.map(c=>
     '<li><span class="cat-name">'+esc(c.name)+'</span><span class="cat-credit">'+esc(c.credit)+'</span></li>'
