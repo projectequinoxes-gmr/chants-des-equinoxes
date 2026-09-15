@@ -599,14 +599,41 @@ const FYC = {
   /* ---- Parallax + twinkle loop ---- */
   const heroImg = $('#heroImg');
   let y = 0, ticking = false;
+  let rafId = null, visible = true, playing = false;
+  let fade = 1, fadeTarget = 1;
+
+  function shouldRun(){ return !reduce && visible && !playing; }
+
   function frame(t){
-    if(!reduce){
-      heroImg.style.transform = 'translate3d(0,'+(y*0.34)+'px,0) scale(1.06)';
-      cv.style.transform      = 'translate3d(0,'+(y*-0.14)+'px,0)';
-      drawStars(t);
-      requestAnimationFrame(frame);
-    }
+    rafId = null;
+    heroImg.style.transform = 'translate3d(0,'+(y*0.34)+'px,0) scale(1.06)';
+    cv.style.transform      = 'translate3d(0,'+(y*-0.14)+'px,0)';
+    fade += (fadeTarget - fade) * 0.045;
+    if(fade < 0.002) fade = 0;
+    cv.style.opacity = fade.toFixed(3);
+    drawStars(t);
+    if(shouldRun() || fade > 0.004) rafId = requestAnimationFrame(frame);
   }
+
+  function startLoop(){
+    fadeTarget = 1;
+    if(rafId === null && !reduce) rafId = requestAnimationFrame(frame);
+  }
+  function stopLoop(){
+    fadeTarget = 0;
+    if(rafId === null && !reduce) rafId = requestAnimationFrame(frame);
+  }
+
+  const heroWatch = new IntersectionObserver((es)=>{
+    visible = es[0].isIntersecting;
+    if(shouldRun()) startLoop(); else stopLoop();
+  },{threshold:0});
+  heroWatch.observe(cv);
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){ playing = playing || false; stopLoop(); }
+    else if(shouldRun()) startLoop();
+  });
   addEventListener('scroll',()=>{
     y = scrollY;
     if(reduce && !ticking){
@@ -614,7 +641,8 @@ const FYC = {
       requestAnimationFrame(()=>{heroImg.style.transform='none';ticking=false});
     }
   },{passive:true});
-  if(!reduce) requestAnimationFrame(frame);
+  cv.style.opacity = '1';
+  if(!reduce) startLoop();
 
   /* ---- Section reveals ---- */
   const io = new IntersectionObserver((es)=>{
@@ -653,6 +681,10 @@ const FYC = {
     pIcon.setAttribute('d', audio.paused ? ICON_PLAY : ICON_PAUSE);
     pPlay.setAttribute('aria-label', audio.paused ? 'Play' : 'Pause');
   }
+
+  audio.addEventListener('play', ()=>{ playing = true;  stopLoop(); });
+  audio.addEventListener('pause',()=>{ playing = false; if(shouldRun()) startLoop(); });
+  audio.addEventListener('ended',()=>{ playing = false; if(shouldRun()) startLoop(); });
 
   function load(i, autoplay){
     const t = FYC.tracks[i];
