@@ -227,7 +227,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
     column-gap:clamp(34px,4vw,68px);
     row-gap:clamp(22px,3vh,44px);
   }
-  .lede{grid-column:1 / -1;grid-row:1;max-width:30ch}
+  .lede{grid-column:1 / -1;grid-row:1;max-width:none}
   .tale-words{grid-column:1;grid-row:2}
   .portrait{
     grid-column:2;grid-row:2;
@@ -246,12 +246,9 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
   max-width:26ch;
 }
 .lede em{font-style:normal;color:var(--sun)}
-.body-copy{font-size:clamp(14px,1.15vw,16px);line-height:1.85;color:var(--moon);max-width:58ch}
+.body-copy{font-size:clamp(15px,1.3vw,18px);line-height:1.8;color:var(--moon);max-width:52ch}
 .body-copy p{margin:0 0 1.1em}
 .body-copy p:last-child{margin:0}
-@media(min-width:900px){
-  .tale-grid{grid-template-columns:1.05fr .95fr;align-items:start}
-}
 
 /* ---- categories: a constellation, not a list ---- */
 .consider{
