@@ -224,13 +224,15 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
   .tale-grid{
     grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
     align-items:end;
-    gap:clamp(34px,4vw,68px);
+    column-gap:clamp(34px,4vw,68px);
+    row-gap:clamp(22px,3vh,44px);
   }
-  .tale-words{grid-column:1;grid-row:1}
+  .lede{grid-column:1 / -1;grid-row:1;max-width:30ch}
+  .tale-words{grid-column:1;grid-row:2}
   .portrait{
-    grid-column:2;grid-row:1;
+    grid-column:2;grid-row:2;
     align-self:end;justify-self:end;
-    max-width:min(460px,42vw);
+    max-width:min(560px,48vw);
   }
 }
 .lede{
@@ -241,7 +243,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
   letter-spacing:-.008em;
   color:var(--moon-white);
   margin:0;
-  max-width:19ch;
+  max-width:26ch;
 }
 .lede em{font-style:normal;color:var(--sun)}
 .body-copy{font-size:clamp(14px,1.15vw,16px);line-height:1.85;color:var(--moon);max-width:58ch}
@@ -498,8 +500,8 @@ body{padding-bottom:72px}
     <figure class="portrait reveal">
       <img id="artistPic" src="artist.webp" alt="Gilbert-Michel Rolle" loading="lazy" decoding="async">
     </figure>
+    <p class="lede reveal" id="lede"></p>
     <div class="tale-words">
-      <p class="lede reveal" id="lede"></p>
       <div class="body-copy reveal" id="taleCopy"></div>
     </div>
   </div>
