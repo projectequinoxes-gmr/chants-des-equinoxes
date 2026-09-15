@@ -60,10 +60,17 @@ a{color:inherit}
 .hero-img{
   position:absolute;
   inset:-12% 0 -12% 0;
-  background:var(--night) center/cover no-repeat;
-  background-image:var(--cover);
+  background:var(--night);
   z-index:-3;
-  will-change:transform;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+.hero-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transform:translateZ(0);
 }
 .hero-veil{
   position:absolute;inset:0;z-index:-2;
@@ -394,7 +401,7 @@ body{padding-bottom:72px}
 <body>
 
 <header class="hero">
-  <div class="hero-img" id="heroImg"></div>
+  <div class="hero-img" id="heroImg"><img id="heroPic" alt="" decoding="async" fetchpriority="high"></div>
   <div class="hero-veil"></div>
   <canvas class="stars" id="stars"></canvas>
 
@@ -532,7 +539,7 @@ const FYC = {
   const $ = (s)=>document.querySelector(s);
   const esc = (s)=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-  document.documentElement.style.setProperty('--cover', 'url("'+FYC.cover+'")');
+  $('#heroPic').src = FYC.cover;
   document.title = FYC.album + " — For your consideration";
 
   $('#whoLine').textContent   = FYC.artist + " · " + FYC.role;
@@ -594,7 +601,18 @@ const FYC = {
     cx.globalAlpha=1;
   }
   seed(); drawStars(0);
-  addEventListener('resize',()=>{seed();drawStars(performance.now())});
+  let rzT = null, lastW = 0, lastH = 0;
+  addEventListener('resize',()=>{
+    if(rzT) clearTimeout(rzT);
+    rzT = setTimeout(()=>{
+      rzT = null;
+      const w = cv.offsetWidth, h = cv.offsetHeight;
+      if(w === lastW && h === lastH) return;
+      lastW = w; lastH = h;
+      seed();
+      drawStars(performance.now());
+    }, 180);
+  },{passive:true});
 
   /* ---- Parallax + twinkle loop ---- */
   const heroImg = $('#heroImg');
@@ -604,14 +622,18 @@ const FYC = {
 
   function shouldRun(){ return !reduce && visible && !playing; }
 
+  let lastY = -1;
   function frame(t){
     rafId = null;
-    heroImg.style.transform = 'translate3d(0,'+(y*0.34)+'px,0) scale(1.06)';
-    cv.style.transform      = 'translate3d(0,'+(y*-0.14)+'px,0)';
+    if(visible && y !== lastY){
+      lastY = y;
+      heroImg.style.transform = 'translate3d(0,'+(y*0.34)+'px,0) scale(1.06)';
+      cv.style.transform      = 'translate3d(0,'+(y*-0.14)+'px,0)';
+    }
     fade += (fadeTarget - fade) * 0.045;
     if(fade < 0.002) fade = 0;
     cv.style.opacity = fade.toFixed(3);
-    drawStars(t);
+    if(fade > 0) drawStars(t);
     if(shouldRun() || fade > 0.004) rafId = requestAnimationFrame(frame);
   }
 
