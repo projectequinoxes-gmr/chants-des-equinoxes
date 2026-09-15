@@ -204,6 +204,21 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
     var(--night);
 }
 .tale-grid{display:grid;grid-template-columns:1fr;gap:clamp(26px,3.4vw,46px);max-width:1180px}
+.tale-words{display:grid;gap:clamp(26px,3.4vw,46px);min-width:0}
+.portrait{margin:0;align-self:end;justify-self:center;max-width:420px;width:100%}
+.portrait img{
+  display:block;width:100%;height:auto;
+  filter:drop-shadow(0 26px 50px rgba(0,0,0,.6));
+  transform:translateZ(0);
+}
+@media (min-width:900px){
+  .tale-grid{
+    grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+    align-items:center;
+    gap:clamp(34px,4vw,68px);
+  }
+  .portrait{align-self:center;justify-self:start;max-width:none}
+}
 .lede{
   font-family:var(--display);
   font-weight:400;
@@ -466,8 +481,13 @@ body{padding-bottom:72px}
 
 <section class="tale">
   <div class="tale-grid">
-    <p class="lede reveal" id="lede"></p>
-    <div class="body-copy reveal" id="taleCopy"></div>
+    <figure class="portrait reveal">
+      <img id="artistPic" src="artist.webp" alt="Gilbert-Michel Rolle" loading="lazy" decoding="async">
+    </figure>
+    <div class="tale-words">
+      <p class="lede reveal" id="lede"></p>
+      <div class="body-copy reveal" id="taleCopy"></div>
+    </div>
   </div>
 </section>
 
