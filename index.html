@@ -227,7 +227,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
     column-gap:clamp(34px,4vw,68px);
     row-gap:clamp(22px,3vh,44px);
   }
-  .lede{grid-column:1 / -1;grid-row:1;max-width:none}
+  .tale-grid .lede{grid-column:1 / -1;grid-row:1;max-width:none;width:100%}
   .tale-words{grid-column:1;grid-row:2}
   .portrait{
     grid-column:2;grid-row:2;
@@ -494,13 +494,13 @@ body{padding-bottom:72px}
 
 <section class="tale">
   <div class="tale-grid">
-    <figure class="portrait reveal">
-      <img id="artistPic" src="artist.webp" alt="Gilbert-Michel Rolle" loading="lazy" decoding="async">
-    </figure>
     <p class="lede reveal" id="lede"></p>
     <div class="tale-words">
       <div class="body-copy reveal" id="taleCopy"></div>
     </div>
+    <figure class="portrait reveal">
+      <img id="artistPic" src="artist.webp" alt="Gilbert-Michel Rolle" loading="lazy" decoding="async">
+    </figure>
   </div>
 </section>
 
