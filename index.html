@@ -136,16 +136,25 @@ a{color:inherit}
   font-family:var(--tech);
   font-size:clamp(9.5px,1vw,11.5px);
   font-weight:500;
-  .hero-top .langs{
-  font-family:var(--tech);
-  font-size:clamp(9.5px,1vw,11.5px);
-  font-weight:500;
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--moon);
   margin:10px 0 0;
+}
+.hero-bottom .langs{
+  font-family:var(--tech);
+  font-size:clamp(8px,2.1vw,11.5px);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--moon);
+  margin:14px 0 0;
   white-space:nowrap;
 }
+.who{
+  font-family:var(--tech);
+  font-size:clamp(10px,1.1vw,12.5px);
+  font-weight:500;
   letter-spacing:.16em;
   color:var(--moon);
   margin:12px 0 0;
@@ -503,7 +512,7 @@ body{padding-bottom:72px}
   <div class="hero-veil"></div>
   <canvas class="stars" id="stars"></canvas>
 
-   <div class="hero-top">
+  <div class="hero-top">
     <div style="width:100%">
       <div class="fyc" id="fycLine" style="display:flex; flex-direction:column; align-items:stretch; text-align:center; line-height:.92; width:100%;">
         <span style="font-size:11.5vw; letter-spacing:.06em;">FOR YOUR</span>
@@ -647,7 +656,7 @@ const FYC = {
     { role:"Engineered & produced by", names:"Jamshed Turel" },
     { role:"Edited, mixed & mastered at", names:"T11 Studios, Canada" },
     { role:"Published by",           names:"ArtistWorld Publishing" },
-    { role:"Animation & art direction", names:"Leonard Daniels Jr." }
+    { role:"Creative director",      names:"Leonard Daniels Jr." }
   ],
 
   label: "Centaurus Classics",
