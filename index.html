@@ -251,14 +251,14 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
     row-gap:clamp(22px,3vh,44px);
   }
   .tale-grid .lede{grid-column:1 / -1;grid-row:1;max-width:none;width:100%}
-  .tale-words{grid-column:1;grid-row:2}
+  .tale-words{grid-column:1 / -1;grid-row:2}
   .tale-grid .body-copy{max-width:none}
   .portrait{
-    grid-column:2;grid-row:2;
-    align-self:end;justify-self:end;
-    max-width:min(510px,44vw);
-    width:100%;
-    margin-left:0;
+    grid-column:1 / -1;grid-row:3;
+    align-self:end;justify-self:stretch;
+    max-width:none;
+    width:calc(100% + (2 * var(--gut)));
+    margin-left:calc(-1 * var(--gut));
     margin-right:calc(-1 * var(--gut));
   }
 }
