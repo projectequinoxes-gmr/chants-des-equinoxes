@@ -1,4 +1,5 @@
 <head>
+<meta charset="utf-8">
    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RNB2WT9P2"></script>
 <script>
@@ -10,27 +11,27 @@
 </script>
 <link rel="canonical" href="https://projectequinoxes.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Chants des Équinoxes">
+<meta property="og:site_name" content="Chants des &#201;quinoxes">
 <meta property="og:url" content="https://projectequinoxes.com/">
-<meta property="og:title" content="Chants des Équinoxes — Gilbert-Michel Rolle">
+<meta property="og:title" content="Chants des &#201;quinoxes &#8212; Gilbert-Michel Rolle">
 <meta property="og:description" content="An original orchestral song cycle composed and performed by Swiss-American tenor Gilbert-Michel Rolle, recorded with the Havana Lyceum Orchestra at Abdala Studios in Havana, and conducted by Marlon Daniel.">
 <meta property="og:image" content="https://www.dropbox.com/scl/fi/iqmocqtr633v0by8kn21t/og-card.png?rlkey=zz3ewsofc39h3lekobkba8d3t&amp;st=l2uy2lrc&amp;raw=1">
 <meta property="og:image:secure_url" content="https://www.dropbox.com/scl/fi/iqmocqtr633v0by8kn21t/og-card.png?rlkey=zz3ewsofc39h3lekobkba8d3t&amp;st=l2uy2lrc&amp;raw=1">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cover art for Chants des Équinoxes: a sun and a moon held in the same sky.">
+<meta property="og:image:alt" content="Cover art for Chants des &#201;quinoxes: a sun and a moon held in the same sky.">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chants des Équinoxes — Gilbert-Michel Rolle">
+<meta name="twitter:title" content="Chants des &#201;quinoxes &#8212; Gilbert-Michel Rolle">
 <meta name="twitter:description" content="An original orchestral song cycle composed and performed by Swiss-American tenor Gilbert-Michel Rolle.">
 <meta name="twitter:image" content="https://www.dropbox.com/scl/fi/iqmocqtr633v0by8kn21t/og-card.png?rlkey=zz3ewsofc39h3lekobkba8d3t&amp;st=l2uy2lrc&amp;raw=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   PALETTE — sampled directly from the cover art
+   PALETTE - sampled directly from the cover art
    ============================================================ */
 :root{
   --night:#0D101B;
@@ -65,7 +66,7 @@ img{max-width:100%;display:block}
 a{color:inherit}
 
 /* ============================================================
-   HERO — built on the cover's sun→moon diagonal
+   HERO
    ============================================================ */
 .hero{
   position:relative;
@@ -140,6 +141,7 @@ a{color:inherit}
   text-transform:uppercase;
   color:var(--moon);
   margin:10px 0 0;
+  white-space:nowrap;
 }
 .hero-bottom .langs{
   font-family:var(--tech);
@@ -153,11 +155,13 @@ a{color:inherit}
 }
 .who{
   font-family:var(--tech);
-  font-size:clamp(10px,1.1vw,12.5px);
+  font-size:clamp(18px,1.7vw,21px);
   font-weight:500;
   letter-spacing:.16em;
   color:var(--moon);
-  margin:12px 0 0;
+  margin:14px 0 0;
+  margin-left:22%;
+  text-align:right;
   text-transform:uppercase;
 }
 
@@ -217,7 +221,7 @@ a{color:inherit}
 section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
 .eyebrow{
   font-family:var(--display);
-  
+
   font-size:clamp(15px,1.8vw,21px);
   color:var(--amber);
   margin:0 0 clamp(18px,2.4vw,30px);
@@ -512,7 +516,7 @@ body{padding-bottom:72px}
   <div class="hero-veil"></div>
   <canvas class="stars" id="stars"></canvas>
 
-  <div class="hero-top">
+   <div class="hero-top">
     <div style="width:100%">
       <div class="fyc" id="fycLine" style="display:flex; flex-direction:column; align-items:stretch; text-align:center; line-height:.92; width:100%;">
         <span style="font-size:11.5vw; letter-spacing:.06em;">FOR YOUR</span>
@@ -579,8 +583,8 @@ body{padding-bottom:72px}
   <button class="pbtn main" id="pPlay" aria-label="Play"><svg viewBox="0 0 24 24" id="pIcon"><path d="M8 5v14l11-7z"/></svg></button>
   <button class="pbtn" id="pNext" aria-label="Next track"><svg viewBox="0 0 24 24"><path d="M17 6v12h2V6h-2zM5 6v12l9-6-9-6z"/></svg></button>
   <div class="p-meta">
-    <p class="p-title" id="pTitle">—</p>
-    <p class="p-sub">Chants des Équinoxes</p>
+    <p class="p-title" id="pTitle">&#8212;</p>
+    <p class="p-sub">Chants des &#201;quinoxes</p>
   </div>
   <span class="p-time" id="pTime">0:00</span>
 </div>
@@ -596,8 +600,8 @@ body{padding-bottom:72px}
 const FYC = {
 
   artist:   "Gilbert-Michel Rolle",
-  role:     "Swiss-American Tenor · Composer",
-  album:    "Chants des Équinoxes",
+  role:     "Swiss-American Tenor \u00B7 Composer",
+  album:    "Chants des \u00C9quinoxes",
   langs:    "Songs in English, French and Spanish",
 
   tagline:  "An original orchestral song cycle entirely composed and sung by the same artist.",
@@ -605,14 +609,14 @@ const FYC = {
   /* --- the narrative section --- */
   lede:     "Marking those rare moments of the <em>equinoxes</em> when day and night share the world in equal twelve-hour measures, the lyrics and melodies of this cycle explore the endless struggle between light and darkness, fluidly alternating between radiant, ethereal melodies and a mysterious exploration of the shadows.",
   tale: [
-    "Chants des Équinoxes is an original orchestral song cycle composed and performed by Swiss-American tenor Gilbert-Michel Rolle, recorded with the Havana Lyceum Orchestra at Abdala Studios in Havana, and conducted by Marlon Daniel.",
+    "Chants des \u00C9quinoxes is an original orchestral song cycle composed and performed by Swiss-American tenor Gilbert-Michel Rolle, recorded with the Havana Lyceum Orchestra at Abdala Studios in Havana, and conducted by Marlon Daniel.",
     "It marks a rare contemporary classical achievement: a principal vocalist serving as composer, poet, and soloist across a single unified, cross-cultural work."
   ],
 
   /* --- FYC categories. Keep to four to six. --- */
   categories: [
     { name: "Best Classical Solo Vocal Album",
-      credit: "Gilbert-Michel Rolle, tenor · Marlon Daniel, conductor · Havana Lyceum Orchestra" },
+      credit: "Gilbert-Michel Rolle, tenor \u00B7 Marlon Daniel, conductor \u00B7 Havana Lyceum Orchestra" },
     { name: "Best Engineered Album, Classical",
       credit: "Jamshed Turel" },
     { name: "Best Arrangement, Instruments and Vocals",
@@ -656,7 +660,7 @@ const FYC = {
     { role:"Engineered & produced by", names:"Jamshed Turel" },
     { role:"Edited, mixed & mastered at", names:"T11 Studios, Canada" },
     { role:"Published by",           names:"ArtistWorld Publishing" },
-    { role:"Creative director",      names:"Leonard Daniels Jr." }
+    { role:"Animation & art direction", names:"Leonard Daniels Jr." }
   ],
 
   label: "Centaurus Classics",
@@ -673,9 +677,9 @@ const FYC = {
   const esc = (s)=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
   $('#heroPic').src = FYC.cover;
-  document.title = FYC.album + " — For your consideration";
+  document.title = FYC.album + " \u2014 For your consideration";
 
-  $('#whoLine').textContent   = FYC.artist + " · " + FYC.role;
+  $('#whoLine').textContent   = FYC.artist + " \u00B7 " + FYC.role;
   $('#albumTitle').textContent= FYC.album;
   $('#langsLine').textContent  = FYC.langs;
   $('#artistName').textContent= FYC.artist;
@@ -683,7 +687,7 @@ const FYC = {
   $('#lede').innerHTML        = FYC.lede;
   $('#taleCopy').innerHTML    = FYC.tale.map(p=>'<p>'+esc(p)+'</p>').join('');
   $('#tracksEyebrow').textContent = FYC.tracksEyebrow;
-  $('#footLine').textContent  = FYC.label + " · " + FYC.artist;
+  $('#footLine').textContent  = FYC.label + " \u00B7 " + FYC.artist;
 
   $('#pressGrid').innerHTML = FYC.press.map(q=>
     '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p><cite>'+esc(q.source)+'</cite></blockquote>'
