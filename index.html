@@ -155,10 +155,10 @@ a{color:inherit}
 }
 .who{
   font-family:var(--tech);
-  font-size:4.3vw;
+  font-size:4.36vw;
   font-weight:900;
   letter-spacing:.04em;
-  color:var(--moon);
+  color:#E2725B;
   margin:14px 0 0;
   text-align:center;
   text-transform:uppercase;
@@ -187,11 +187,11 @@ a{color:inherit}
   font-family:var(--display);
   font-weight:400;
   text-transform:uppercase;
-  font-size:min(clamp(16px,3.4vw,50px), 7.4vw);
+  font-size:min(clamp(21px,4.5vw,55px), 7.4vw);
   line-height:1.1;
   letter-spacing:-.005em;
   margin:min(3.2vw,26px) 0 0;
-  color:var(--moon-white);
+  color:#E2725B;
   white-space:nowrap;
 }
 .hero-role{
@@ -699,7 +699,7 @@ const FYC = {
   $('#footLine').textContent  = FYC.label + " \u00B7 " + FYC.artist;
 
   $('#pressGrid').innerHTML = FYC.press.map(q=>
-    '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p>'+esc(q.source)+'</blockquote>'
+    '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p><cite>'+esc(q.source)+'</cite></blockquote>'
   ).join('');
 
   $('#cats').innerHTML = FYC.categories.map(c=>
