@@ -155,13 +155,11 @@ a{color:inherit}
 }
 .who{
   font-family:var(--tech);
-  font-size:2.36vw;
+  font-size:4.3vw;
   font-weight:900;
-  letter-spacing:-.015em;
+  letter-spacing:.04em;
   color:var(--moon);
   margin:14px 0 0;
-  margin-left:calc(0px - var(--gut));
-  margin-right:calc(0px - var(--gut));
   text-align:center;
   text-transform:uppercase;
   white-space:nowrap;
@@ -196,6 +194,16 @@ a{color:inherit}
   color:var(--moon-white);
   white-space:nowrap;
 }
+.hero-role{
+  font-family:var(--tech);
+  font-size:clamp(11px,2.4vw,15px);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--moon);
+  margin:10px 0 0;
+  white-space:nowrap;
+}
 .tagline{
   font-size:clamp(12px,1.35vw,15px);
   line-height:1.65;
@@ -207,12 +215,12 @@ a{color:inherit}
   position:absolute;
   left:50%;bottom:20px;
   transform:translateX(-50%);
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-size:25.5px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(201,211,227,.5);
   opacity:0;animation:rise 1.6s 1.9s ease forwards;
 }
 .cue::after{
-  content:"";display:block;width:1px;height:34px;margin:12px auto 0;
+  content:"";display:block;width:1.5px;height:49px;margin:12px auto 0;
   background:linear-gradient(to bottom,rgba(201,211,227,.55),transparent);
 }
 @keyframes rise{to{opacity:1;transform:none}}
@@ -533,7 +541,7 @@ body{padding-bottom:72px}
     <h1 class="album" id="albumTitle"></h1>
     <p class="langs" id="langsLine"></p>
     <p class="artist" id="artistName"></p>
-    <p class="tagline" id="tagline"></p>
+    <p class="hero-role" id="heroRole"></p>
   </div>
 
   <div class="cue">Scroll</div>
@@ -602,11 +610,10 @@ body{padding-bottom:72px}
 const FYC = {
 
   artist:   "Gilbert-Michel Rolle",
-  role:     "Swiss-American Tenor \u00B7 Composer",
+  role:     "Composer",
   album:    "Chants des \u00C9quinoxes",
   langs:    "Songs in English, French and Spanish",
-
-  tagline:  "An original orchestral song cycle entirely composed and sung by the same artist.",
+  heroRole: "Swiss-American Tenor",
 
   /* --- the narrative section --- */
   lede:     "Marking those rare moments of the <em>equinoxes</em> when day and night share the world in equal twelve-hour measures, the lyrics and melodies of this cycle explore the endless struggle between light and darkness, fluidly alternating between radiant, ethereal melodies and a mysterious exploration of the shadows.",
@@ -685,7 +692,7 @@ const FYC = {
   $('#albumTitle').textContent= FYC.album;
   $('#langsLine').textContent  = FYC.langs;
   $('#artistName').textContent= FYC.artist;
-  $('#tagline').textContent   = FYC.tagline;
+  $('#heroRole').textContent  = FYC.heroRole;
   $('#lede').innerHTML        = FYC.lede;
   $('#taleCopy').innerHTML    = FYC.tale.map(p=>'<p>'+esc(p)+'</p>').join('');
   $('#tracksEyebrow').textContent = FYC.tracksEyebrow;
