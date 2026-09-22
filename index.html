@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RNB2WT9P2"></script>
 <script>
@@ -45,8 +42,8 @@
   --moon-lit:#C9D3E3;
   --moon-white:#EDF1F7;
   --sun:#EFD388;
-  --amber:#E58D22;
-  --ember:#BC472B;
+  --amber:#CE7350;
+  --ember:#A8503A;
 
   --display:"Archivo",Helvetica,Arial,sans-serif;
   --tech:"Archivo",Helvetica,Arial,sans-serif;
@@ -99,7 +96,7 @@ a{color:inherit}
 .hero-veil{
   position:absolute;inset:0;z-index:-2;
   background:
-    radial-gradient(120% 80% at 22% 74%, rgba(188,71,43,.26), transparent 62%),
+    radial-gradient(120% 80% at 22% 74%, rgba(176,88,62,.26), transparent 62%),
     radial-gradient(90% 70% at 68% 26%, rgba(166,174,190,.20), transparent 60%),
     linear-gradient(to bottom, rgba(13,16,27,.62) 0%, rgba(13,16,27,.18) 34%, rgba(13,16,27,.40) 66%, rgba(13,16,27,.94) 100%);
 }
@@ -158,14 +155,14 @@ a{color:inherit}
 }
 .who{
   font-family:var(--tech);
-  font-size:clamp(18px,1.7vw,21px);
-  font-weight:500;
-  letter-spacing:.16em;
+  font-size:2.16vw;
+  font-weight:600;
+  letter-spacing:0;
   color:var(--moon);
   margin:14px 0 0;
-  margin-left:22%;
-  text-align:right;
+  text-align:center;
   text-transform:uppercase;
+  white-space:nowrap;
 }
 
 /* sun-side block, lower left */
@@ -184,7 +181,7 @@ a{color:inherit}
   letter-spacing:-.012em;
   margin:0;
   color:var(--sun);
-  text-shadow:0 0 70px rgba(229,141,34,.5),0 0 140px rgba(188,71,43,.35),0 4px 30px rgba(0,0,0,.6);
+  text-shadow:0 0 70px rgba(206,115,80,.5),0 0 140px rgba(176,88,62,.35),0 4px 30px rgba(0,0,0,.6);
 }
 .artist{
   font-family:var(--display);
@@ -237,7 +234,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
 .tale{
   overflow:hidden;
   background:
-    radial-gradient(80% 55% at 12% 8%, rgba(188,71,43,.16), transparent 65%),
+    radial-gradient(80% 55% at 12% 8%, rgba(176,88,62,.16), transparent 65%),
     radial-gradient(70% 60% at 92% 88%, rgba(63,66,92,.4), transparent 62%),
     var(--night);
 }
@@ -297,7 +294,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
 /* ---- categories: a constellation, not a list ---- */
 .consider{
   background:
-    radial-gradient(105% 70% at 50% 120%, rgba(229,141,34,.17), transparent 66%),
+    radial-gradient(105% 70% at 50% 120%, rgba(206,115,80,.17), transparent 66%),
     var(--night-2);
   text-align:center;
 }
@@ -385,7 +382,7 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
 
 /* ---- listen ---- */
 .listen{text-align:center;background:var(--night);
-  background-image:radial-gradient(90% 60% at 50% 0%, rgba(229,141,34,.14), transparent 65%)}
+  background-image:radial-gradient(90% 60% at 50% 0%, rgba(206,115,80,.14), transparent 65%)}
 
 /* ---- credits ---- */
 .credits{background:var(--night);border-top:1px solid rgba(166,174,190,.16)}
@@ -522,9 +519,9 @@ body{padding-bottom:72px}
    <div class="hero-top">
     <div style="width:100%">
       <div class="fyc" id="fycLine" style="display:flex; flex-direction:column; align-items:stretch; text-align:center; line-height:.92; width:100%;">
-        <span style="font-size:11.5vw; letter-spacing:.06em;">FOR YOUR</span>
-        <span class="gr" style="font-size:20vw; letter-spacing:.01em;">Grammy<sup class="rmark">&#174;</sup></span>
-        <span style="font-size:6.9vw; letter-spacing:.055em;">CONSIDERATION</span>
+        <span style="font-size:11.52vw; letter-spacing:.06em;">FOR YOUR</span>
+        <span class="gr" style="font-size:14.8vw; letter-spacing:.01em;">Grammy<sup class="rmark">&#174;</sup></span>
+        <span style="font-size:7.24vw; letter-spacing:.055em;">CONSIDERATION</span>
       </div>
       <p class="who" id="whoLine"></p>
     </div>
@@ -563,7 +560,7 @@ body{padding-bottom:72px}
 </section>
 
 <section class="tracks">
-  <p class="eyebrow reveal" id="tracksEyebrow">The , told in reverse</p>
+  <p class="eyebrow reveal" id="tracksEyebrow">The cycle, told in reverse</p>
   <ul class="track-list" id="trackList"></ul>
 </section>
 
@@ -607,7 +604,7 @@ const FYC = {
   album:    "Chants des \u00C9quinoxes",
   langs:    "Songs in English, French and Spanish",
 
-  
+  tagline:  "An original orchestral song cycle entirely composed and sung by the same artist.",
 
   /* --- the narrative section --- */
   lede:     "Marking those rare moments of the <em>equinoxes</em> when day and night share the world in equal twelve-hour measures, the lyrics and melodies of this cycle explore the endless struggle between light and darkness, fluidly alternating between radiant, ethereal melodies and a mysterious exploration of the shadows.",
