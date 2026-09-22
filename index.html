@@ -699,7 +699,7 @@ const FYC = {
   $('#footLine').textContent  = FYC.label + " \u00B7 " + FYC.artist;
 
   $('#pressGrid').innerHTML = FYC.press.map(q=>
-    '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p><cite>'+esc(q.source)+'</cite></blockquote>'
+    '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p>'+esc(q.source)+'</blockquote>'
   ).join('');
 
   $('#cats').innerHTML = FYC.categories.map(c=>
