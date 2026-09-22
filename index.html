@@ -155,11 +155,11 @@ a{color:inherit}
 }
 .who{
   font-family:var(--tech);
-  font-size:4.36vw;
-  font-weight:900;
+  font-size:4.45vw;
+  font-weight:700;
   letter-spacing:.04em;
   color:#E2725B;
-  margin:14px 0 0;
+  margin:clamp(24px,5vh,54px) 0 0;
   text-align:center;
   text-transform:uppercase;
   white-space:nowrap;
@@ -213,8 +213,9 @@ a{color:inherit}
 }
 .cue{
   position:absolute;
-  left:50%;bottom:20px;
-  transform:translateX(-50%);
+  left:auto;right:var(--gut);
+  bottom:20px;
+  text-align:right;
   font-size:25.5px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(201,211,227,.5);
   opacity:0;animation:rise 1.6s 1.9s ease forwards;
