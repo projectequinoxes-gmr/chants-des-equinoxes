@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="https://www.dropbox.com/scl/fi/iqmocqtr633v0by8kn21t/og-card.png?rlkey=zz3ewsofc39h3lekobkba8d3t&amp;st=l2uy2lrc&amp;raw=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,700&family=Italiana&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    PALETTE - sampled directly from the cover art
@@ -121,10 +121,45 @@ a{color:inherit}
   margin:0;
   text-shadow:0 0 34px rgba(166,174,190,.7),0 2px 16px rgba(0,0,0,.7);
 }
-.gr{
-  font-size:calc(1em + 16px);
+/* --- the lockup: each line measures itself and fills the full width --- */
+#fycLine{
+  width:100%;
+  display:block;
+  text-align:center;
+}
+#fycLine .fyc-ln{display:block}
+#fycLine .fyc-fit{
+  display:inline-block;
+  white-space:nowrap;
+  font-size:100px;            /* replaced at runtime by fitLockup() */
+}
+.fyc-top{
+  font-family:"Playfair Display",Georgia,"Times New Roman",serif;
   font-weight:700;
-  letter-spacing:.03em;
+  font-style:italic;
+  text-transform:none;
+  letter-spacing:.005em;
+  margin-right:-.005em;
+  line-height:.96;
+  color:var(--moon-white);
+}
+.fyc-gr{
+  font-family:var(--display);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  margin-right:-.01em;
+  line-height:.98;
+}
+.fyc-bot{
+  font-family:"Italiana",Georgia,"Times New Roman",serif;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  margin-right:-.09em;
+  line-height:1;
+  margin-top:-.06em;
+  color:var(--moon-white);
 }
 .rmark{
   font-size:.42em;
@@ -163,6 +198,10 @@ a{color:inherit}
   text-align:center;
   text-transform:uppercase;
   white-space:nowrap;
+  text-shadow:
+    0 2px 10px rgba(13,16,27,.92),
+    0 0 26px rgba(13,16,27,.78),
+    0 0 58px rgba(13,16,27,.55);
 }
 
 /* sun-side block, lower left */
@@ -529,10 +568,10 @@ body{padding-bottom:72px}
 
    <div class="hero-top">
     <div style="width:100%">
-      <div class="fyc" id="fycLine" style="display:flex; flex-direction:column; align-items:stretch; text-align:center; line-height:.92; width:100%;">
-        <span style="font-size:11.52vw; letter-spacing:.06em;">FOR YOUR</span>
-        <span class="gr" style="font-size:14.8vw; letter-spacing:.01em;">Grammy<sup class="rmark">&#174;</sup></span>
-        <span style="font-size:7.24vw; letter-spacing:.055em;">CONSIDERATION</span>
+      <div class="fyc" id="fycLine">
+        <span class="fyc-ln"><span class="fyc-fit fyc-top">For your</span></span>
+        <span class="fyc-ln"><span class="fyc-fit fyc-gr">Grammy<sup class="rmark">&#174;</sup></span></span>
+        <span class="fyc-ln"><span class="fyc-fit fyc-bot">Consideration</span></span>
       </div>
       <p class="who" id="whoLine"></p>
     </div>
@@ -724,6 +763,31 @@ const FYC = {
   $('#listenRow').innerHTML = FYC.listen.map(l=>
     '<a class="btn '+(l.solid?'btn-solid':'btn-ghost')+'" href="'+esc(l.url)+'">'+esc(l.label)+'</a>'
   ).join('');
+
+  /* ---- Lockup auto-fit: three lines, one width, whatever the font ---- */
+  const LOCK_REF = 100;
+  function fitLockup(){
+    const box = document.getElementById('fycLine');
+    if(!box) return;
+    const avail = box.clientWidth;
+    if(!avail) return;
+    box.querySelectorAll('.fyc-fit').forEach(el=>{
+      el.style.fontSize = LOCK_REF + 'px';
+      const natural = el.getBoundingClientRect().width;
+      if(!natural) return;
+      el.style.fontSize = (LOCK_REF * avail / natural).toFixed(2) + 'px';
+    });
+  }
+  let lockT = null;
+  addEventListener('resize',()=>{
+    if(lockT) clearTimeout(lockT);
+    lockT = setTimeout(fitLockup, 140);
+  },{passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitLockup);
+  addEventListener('load', fitLockup);
+  fitLockup();
+  setTimeout(fitLockup, 600);
+  setTimeout(fitLockup, 1600);
 
   /* ---- Starfield ---- */
   const cv = $('#stars'), cx = cv.getContext('2d');
