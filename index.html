@@ -794,12 +794,13 @@ const FYC = {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let stars=[], W=0, H=0;
   function seed(){
-    W = cv.width  = cv.offsetWidth  * devicePixelRatio;
-    H = cv.height = cv.offsetHeight * devicePixelRatio;
+    const DPR = Math.min(devicePixelRatio || 1, 2);
+    W = cv.width  = cv.offsetWidth  * DPR;
+    H = cv.height = cv.offsetHeight * DPR;
     const n = Math.round((cv.offsetWidth*cv.offsetHeight)/5200);
     stars = Array.from({length:Math.min(n,320)},()=>({
       x:Math.random()*W, y:Math.random()*H,
-      r:(Math.random()*1.35+.28)*devicePixelRatio,
+      r:(Math.random()*1.35+.28)*DPR,
       d:Math.random()*.55+.18,
       p:Math.random()*Math.PI*2,
       s:Math.random()*.018+.004
@@ -840,6 +841,7 @@ const FYC = {
   let lastY = -1;
   function frame(t){
     rafId = null;
+    looping = false;
     if(visible && y !== lastY){
       lastY = y;
       heroImg.style.transform = 'translate3d(0,'+(y*0.34)+'px,0) scale(1.06)';
@@ -849,17 +851,17 @@ const FYC = {
     if(fade < 0.002) fade = 0;
     cv.style.opacity = fade.toFixed(3);
     if(fade > 0) drawStars(t);
-    if(shouldRun() || fade > 0.004) rafId = requestAnimationFrame(frame);
+    if(shouldRun() || fade > 0.004) pump();
   }
 
-  function startLoop(){
-    fadeTarget = 1;
-    if(rafId === null && !reduce) rafId = requestAnimationFrame(frame);
+  let looping = false;
+  function pump(){
+    if(looping || reduce) return;
+    looping = true;
+    rafId = requestAnimationFrame(frame);
   }
-  function stopLoop(){
-    fadeTarget = 0;
-    if(rafId === null && !reduce) rafId = requestAnimationFrame(frame);
-  }
+  function startLoop(){ fadeTarget = 1; pump(); }
+  function stopLoop(){  fadeTarget = 0; pump(); }
 
   const heroWatch = new IntersectionObserver((es)=>{
     visible = es[0].isIntersecting;
