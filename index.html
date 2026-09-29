@@ -622,6 +622,13 @@ body{padding-bottom:72px}
   color:var(--amber);
   margin:20px 0 0;
 }
+
+/* ---- categories, hero placement: original scale, centred, spaced ---- */
+.hero-bottom .hero-cats{
+  background:none;
+  width:min(1000px, calc(100vw - 2 * var(--gut)));
+  margin:clamp(30px,4.5vh,58px) 0 clamp(44px,6.5vh,86px);
+}
 </style>
 </head>
 <body>
@@ -645,6 +652,10 @@ body{padding-bottom:72px}
   <div class="hero-bottom">
     <h1 class="album" id="albumTitle"></h1>
     <p class="langs" id="langsLine"></p>
+    <div class="consider hero-cats">
+  <p class="eyebrow">For your consideration in</p>
+  <ul class="cats" id="cats"></ul>
+</div>
     <p class="artist" id="artistName"></p>
     <p class="hero-role" id="heroRole"></p>
   </div>
@@ -667,11 +678,6 @@ body{padding-bottom:72px}
 <section class="press">
   <p class="eyebrow reveal" style="text-align:center">In the press</p>
   <div class="press-grid" id="pressGrid"></div>
-</section>
-
-<section class="consider">
-  <p class="eyebrow reveal" style="text-align:center">For your consideration in</p>
-  <ul class="cats" id="cats"></ul>
 </section>
 
 <section class="listen">
