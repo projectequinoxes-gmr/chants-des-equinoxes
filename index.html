@@ -150,6 +150,7 @@ a{color:inherit}
   letter-spacing:.01em;
   margin-right:-.01em;
   line-height:.98;
+  color:var(--sun);
 }
 .fyc-bot{
   font-family:"Italiana",Georgia,"Times New Roman",serif;
@@ -162,7 +163,7 @@ a{color:inherit}
   color:var(--moon-white);
 }
 .rmark{
-  font-size:.42em;
+  font-size:.32em;
   vertical-align:super;
   line-height:0;
   letter-spacing:0;
@@ -242,13 +243,6 @@ a{color:inherit}
   color:var(--moon);
   margin:10px 0 0;
   white-space:nowrap;
-}
-.tagline{
-  font-size:clamp(12px,1.35vw,15px);
-  line-height:1.65;
-  color:var(--moon);
-  margin:18px 0 0;
-  max-width:44ch;
 }
 .cue{
   position:absolute;
@@ -409,7 +403,6 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
   margin:0;
 }
 .track-note{font-size:clamp(12.5px,1.05vw,14.5px);line-height:1.7;color:var(--moon);margin:10px 0 0;max-width:56ch}
-.track.lead .track-title{color:var(--sun)}
 .track-flag{
   display:inline-block;margin-left:14px;vertical-align:middle;
   font-family:var(--tech);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
@@ -430,12 +423,84 @@ section{padding:clamp(48px,7.5vh,100px) var(--gut);position:relative}
 .btn-ghost:hover{border-color:var(--moon-white);transform:translateY(-2px)}
 .btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:clamp(26px,3.5vw,40px)}
 
+/* listen section: one full-width band, split in two */
+.listen .btn-row{
+  gap:0;
+  flex-wrap:nowrap;
+  border:1px solid rgba(166,174,190,.30);
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow:0 18px 60px rgba(0,0,0,.45);
+}
+.listen .btn-row .btn{
+  flex:1 1 40%;
+  flex-direction:column;
+  gap:7px;
+  justify-content:center;
+  border-radius:0;
+  padding:clamp(26px,3.6vw,40px) 18px;
+  font-size:clamp(13px,2.6vw,23px);
+  font-weight:500;
+  letter-spacing:.1em;
+  text-align:center;
+}
+.listen .btn-row .btn .sub{
+  display:block;
+  max-width:24ch;
+  margin:0 auto;
+  font-size:clamp(8.5px,1.5vw,11.5px);
+  line-height:1.5;
+  letter-spacing:.1em;
+  font-weight:400;
+  opacity:.72;
+  text-transform:uppercase;
+  text-wrap:balance;
+}
+.listen .btn-row .btn-solid{
+  flex:1 1 60%;
+  border-radius:999px 0 0 999px;
+  transition:background .3s,box-shadow .3s,color .3s;
+}
+.listen .btn-row .btn-solid:hover,
+.listen .btn-row .btn-solid:focus-visible{
+  transform:none;
+  background:#F7E3A8;
+  color:#120C02;
+  box-shadow:inset 0 0 0 3px rgba(26,18,6,.85), inset 0 0 44px rgba(26,18,6,.18);
+}
+.listen .btn-row .btn-ghost{
+  border:0;
+  border-left:1px solid rgba(166,174,190,.42);
+  border-radius:0 999px 999px 0;
+  background:rgba(22,26,41,.72);
+}
+.listen .btn-row .btn-ghost:hover{transform:none;border-color:rgba(237,241,247,.85);background:rgba(47,38,62,.8)}
+@media (max-width:560px){
+  .listen{padding-top:clamp(72px,12vh,120px);padding-bottom:clamp(110px,19vh,190px)}
+  .listen .btn-row{border-radius:18px}
+  .listen .btn-row .btn-solid{border-radius:17px 0 0 17px}
+  .listen .btn-row .btn-ghost{border-radius:0 17px 17px 0}
+  .listen .btn-row .btn{padding:20px 12px;letter-spacing:.06em}
+}
+
 /* ---- listen ---- */
-.listen{text-align:center;background:var(--night);
-  background-image:radial-gradient(90% 60% at 50% 0%, rgba(206,115,80,.14), transparent 65%)}
+.listen{
+  text-align:center;
+  background:var(--night);
+  padding-top:clamp(96px,16vh,200px);
+  padding-bottom:clamp(150px,26vh,330px);
+}
 
 /* ---- credits ---- */
-.credits{background:var(--night);border-top:1px solid rgba(166,174,190,.16)}
+.credits{
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(206,115,80,.14), transparent 65%),
+    var(--night);
+  border-top:1px solid rgba(166,174,190,.16);
+}
 .cred-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
@@ -609,17 +674,18 @@ body{padding-bottom:72px}
   <ul class="cats" id="cats"></ul>
 </section>
 
-<section class="tracks">
-  <p class="eyebrow reveal" id="tracksEyebrow">The cycle, told in reverse</p>
-  <ul class="track-list" id="trackList"></ul>
-</section>
-
 <section class="listen">
   <div class="reveal">
     <p class="eyebrow" style="text-align:center">Hear the recording</p>
     <div class="btn-row" id="listenRow"></div>
   </div>
 </section>
+
+<section class="tracks">
+  <p class="eyebrow reveal" id="tracksEyebrow">The cycle, told in reverse</p>
+  <ul class="track-list" id="trackList"></ul>
+</section>
+
 
 <section class="credits">
   <p class="eyebrow reveal">Credits</p>
@@ -685,8 +751,12 @@ const FYC = {
 
   /* --- outbound links --- */
   listen: [
-    { label:"Listen",        url:"https://linktr.ee/projectequinoxes", solid:true  },
-    { label:"Visit the website", url:"https://gilbertmichelrolle.com/", solid:false }
+    { label:"Listen",
+      sub:"Spotify \u00B7 Apple Music \u00B7 Pandora and more",
+      url:"https://linktr.ee/projectequinoxes", solid:true  },
+    { label:"Website",
+      sub:"Notes and press",
+      url:"https://gilbertmichelrolle.com/", solid:false }
   ],
 
   /* --- press. Career notices, honestly attributed. No dates. --- */
@@ -726,7 +796,7 @@ const FYC = {
   const esc = (s)=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
   $('#heroPic').src = FYC.cover;
-  document.title = FYC.album + " \u2014 For your consideration";
+  document.title = FYC.album + " \u2014 For your Grammy\u00AE Consideration";
 
   $('#whoLine').textContent   = FYC.artist + " \u00B7 " + FYC.role;
   $('#albumTitle').textContent= FYC.album;
@@ -761,7 +831,10 @@ const FYC = {
   ).join('');
 
   $('#listenRow').innerHTML = FYC.listen.map(l=>
-    '<a class="btn '+(l.solid?'btn-solid':'btn-ghost')+'" href="'+esc(l.url)+'">'+esc(l.label)+'</a>'
+    '<a class="btn '+(l.solid?'btn-solid':'btn-ghost')+'" href="'+esc(l.url)+'">'+
+      '<span>'+esc(l.label)+'</span>'+
+      (l.sub?'<span class="sub">'+esc(l.sub)+'</span>':'')+
+    '</a>'
   ).join('');
 
   /* ---- Lockup auto-fit: three lines, one width, whatever the font ---- */
