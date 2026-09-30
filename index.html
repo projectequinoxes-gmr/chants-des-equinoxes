@@ -517,6 +517,17 @@ footer{
   font-size:11px;letter-spacing:.06em;color:rgba(166,174,190,.45);
   text-align:center;line-height:1.9;
 }
+footer a{
+  color:rgba(166,174,190,.72);
+  text-decoration:none;
+  border-bottom:1px solid rgba(166,174,190,.22);
+  padding-bottom:1px;
+  transition:color .35s,border-color .35s;
+}
+footer a:hover,footer a:focus-visible{
+  color:var(--sun);
+  border-bottom-color:rgba(239,211,136,.55);
+}
 
 /* ---- track play affordance ---- */
 .track{cursor:pointer;transition:background .4s}
@@ -814,7 +825,7 @@ const FYC = {
   $('#lede').innerHTML        = FYC.lede;
   $('#taleCopy').innerHTML    = FYC.tale.map(p=>'<p>'+esc(p)+'</p>').join('');
   $('#tracksEyebrow').textContent = FYC.tracksEyebrow;
-  $('#footLine').textContent  = FYC.label + " \u00B7 " + FYC.artist;
+  $('#footLine').innerHTML    = 'Website designed by <a href="https://www.linkedin.com/in/lndjr" target="_blank" rel="noopener">MRLD WRLD</a>';
 
   $('#pressGrid').innerHTML = FYC.press.map(q=>
     '<blockquote class="quote reveal"><p>&#8220;'+esc(q.quote)+'&#8221;</p><cite>'+esc(q.source)+'</cite></blockquote>'
